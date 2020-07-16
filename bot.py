@@ -73,11 +73,19 @@ class Rule:
         self.regex = re.compile(raw_rule['match_value'])
         self.tags = raw_rule['tags']
 
+        p = 1
+        if 'probability' in raw_rule :
+            p = float(raw_rule['probability'])
+        self.probability = p
+
     def process(self, msg):
         if self.regex.match(msg) :
-            tag = random_select(self.tags)
-            print('   responding with tag', tag)
-            return get_semirandom_gif(tag)
+            if random.random() <= self.probability :
+                tag = random_select(self.tags)
+                print('   responding with tag', tag)
+                return get_semirandom_gif(tag)
+            else :
+                print('   match found but randomly ignored. self.probability=',self.probability)
             
 rules = None
 with open('config.json') as config_file :
@@ -87,6 +95,7 @@ with open('config.json') as config_file :
 print('Rules: ',rules)
 def process_message(text) :
     print('Processing message "%s"'%text)
+    text  = text.lower()
     for rule in rules :
         response = rule.process(text)
         if response :

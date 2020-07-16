@@ -36,6 +36,16 @@
             "match_value" : "^!help",
             "tags" : ["help"],
             "probability" : 0.1
+        },
+        {
+            "match_value" : ".*rainbow.*",
+            "tags" : ["rainbow"],
+            "probability" : 0.1
+        },
+        {
+            "match_value" : ".*python.*",
+            "tags" : ["python"],
+            "probability" : 0.05
         }
     ]
 }
