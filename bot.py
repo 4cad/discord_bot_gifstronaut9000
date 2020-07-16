@@ -41,7 +41,6 @@ def get_semirandom_gif(query) :
         return None
     
     response =  json.loads(r.text)
-    print(response)
     return response['data'][0]['url']
 
 def canonical_name(name):
@@ -86,7 +85,7 @@ class MyClient(discord.Client):
             return
 
         if message.content.startswith("!gifme") :
-            tag_m = re.findall("!gifme ([^ ]+)", message.content)
+            tag_m = re.findall("!gifme ([^$]+)", message.content)
             if len(tag_m) < 1:
                 return
             tag = tag_m[0]
