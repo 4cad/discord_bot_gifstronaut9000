@@ -68,10 +68,35 @@ def random_select(x) :
     random.shuffle(x)
     return x[0]
 
-async def make_role(guild, role_name):
-    result = await guild.create_role(
-        name=role_name, color=discord.Color(0xffff00))
-    return result
+class Rule:
+    def __init__(self, raw_rule):
+        self.regex = re.compile(raw_rule['match_value'])
+        self.tags = raw_rule['tags']
+
+    def process(self, msg):
+        if self.regex.match(msg) :
+            tag = random_select(self.tags)
+            print('   responding with tag', tag)
+            return get_semirandom_gif(tag)
+            
+rules = None
+with open('config.json') as config_file :
+    raw_rules = json.load(config_file)['rules']
+    rules = [Rule(x) for x in raw_rules]
+
+print('Rules: ',rules)
+def process_message(text) :
+    print('Processing message "%s"'%text)
+    for rule in rules :
+        response = rule.process(text)
+        if response :
+            return response
+    print('   no match found in rules. Staying silent...')
+    return None
+
+#process_message('!solved')
+#process_message('That looks like coppersmith')
+#process_message('What?')
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -84,20 +109,10 @@ class MyClient(discord.Client):
             print('   ignoring message from bot.')
             return
 
-        if message.content.startswith("!gifme") :
-            tag_m = re.findall("!gifme ([^$]+)", message.content)
-            if len(tag_m) < 1:
-                return
-            tag = tag_m[0]
-            result = await message.channel.send(get_semirandom_gif(tag))
-        elif (message.content.startswith('!solved') or message.content.startswith('!giftestsolve')) :
-            tag = random_select(['win','celebrate','well done','awesome','excellent','woohoo'])
-            print('Sending solved gif with tag "%s"'%tag)
-            result = await message.channel.send(get_semirandom_gif(tag))
-        elif 'coppersmith' in message.content.lower() :
-            result = await message.channel.send(get_semirandom_gif('suspicious'))
-        elif message.content.startswith("!help") :
-            result = await message.channel.send("The lord helps those who help themselves.")
+        response = process_message(message.content)
+        print('Responding with ',response)
+        if response :
+            result = await message.channel.send(response)
              
 client = MyClient()
 client.run(discord_bot_token)

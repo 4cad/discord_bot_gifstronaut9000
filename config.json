@@ -1,0 +1,41 @@
+{
+    "rules": [
+        {
+            "match_value" : "^!solved",
+            "tags" : ["win","celebrate","well done","awesome","excellent","woohoo"]
+        },
+        {
+            "match_value" : "^!unsolved",
+            "tags" : ["defeat", "loss", "demolished", "depression", "sad", "devastating defeat", "headshot"]
+        },
+        {
+            "match_value" : "^!writeup",
+            "tags" : ["youre the best", "champion", "master", "expert", "best of the best", "shoot for the moon"]
+        },
+        {
+            "match_value" : "^!sos",
+            "tags" : ["sos", "help needed", "drowning", "apocalypse"]
+        },
+        {
+            "match_value" : "^!mkactive",
+            "tags" : ["ready to fight"]
+        },
+        {
+            "match_value" : "^!workingon",
+            "tags" : ["ready set go", "you got this", "on target"]
+        },
+        {
+            "match_value" : "^!stopworking",
+            "tags" : ["defeat", "shame", "but why"]
+        },
+        {
+            "match_value" : ".*(coppersmith|derand).*",
+            "tags" : ["suspicion", "disbelief", "sarcasm", "yeah right", "eject" , "thats what they all say"]
+        },
+        {
+            "match_value" : "^!help",
+            "tags" : ["help"],
+            "probability" : 0.1
+        }
+    ]
+}
