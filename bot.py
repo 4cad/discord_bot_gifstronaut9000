@@ -118,6 +118,12 @@ class MyClient(discord.Client):
             print('   ignoring message from bot.')
             return
 
+        if message.content.startswith('!help') :
+            result = await message.channel.send('The lord helps those who help themselves. https://github.com/4cad/discord_bot_gifstronaut9000')
+        elif message.content.startswith('!ihatepuppies') :
+            result = await message.channel.send(':(')
+            exit(0)
+
         response = process_message(message.content)
         print('Responding with ',response)
         if response :
