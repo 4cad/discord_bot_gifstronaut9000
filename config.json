@@ -2,7 +2,7 @@
     "rules": [
         {
             "match_value" : "^!solved",
-            "tags" : ["win","celebrate","well done","awesome","excellent","woohoo"]
+            "tags" : ["win","celebrate","awesome","excellent","woohoo"]
         },
         {
             "match_value" : "^!unsolved",
@@ -10,7 +10,7 @@
         },
         {
             "match_value" : "^!writeup",
-            "tags" : ["youre the best", "champion", "master", "expert"]
+            "tags" : ["champion", "master", "expert"]
         }
     ]
 }
