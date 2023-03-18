@@ -128,6 +128,8 @@ class MyClient(discord.Client):
         print('Responding with ',response)
         if response :
             result = await message.channel.send(response)
-             
-client = MyClient()
+          
+intents = discord.Intents.default()
+intents.message_content = True   
+client = MyClient(intents=intents)
 client.run(discord_bot_token)

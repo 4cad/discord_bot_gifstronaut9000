@@ -5,6 +5,10 @@
             "tags" : ["win","celebrate","awesome","excellent","woohoo"]
         },
         {
+            "match_value" : "^!solved2",
+            "tags" : ["win","celebrate","awesome","excellent","woohoo"]
+        },
+        {
             "match_value" : "^!unsolved",
             "tags" : ["defeat", "demolished", "depression"]
         },
